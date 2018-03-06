@@ -1,0 +1,12 @@
+#one {
+    height: 50px;
+    width: 100px;
+    background-color: rgb(186, 226, 226);
+    display: table-cell;
+    vertical-align: middle;
+}
+#two {
+    height: 30px;
+    width: 50px;
+    background-color: rgb(198, 176, 233);
+}
