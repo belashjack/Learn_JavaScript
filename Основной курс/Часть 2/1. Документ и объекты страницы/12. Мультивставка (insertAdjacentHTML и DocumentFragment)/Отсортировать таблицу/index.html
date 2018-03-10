@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            font-size: 14px;
+        }
+        table {
+            text-align: left;
+            border-collapse: collapse;
+        }
+        thead tr {
+            border-bottom: 2px solid rgb(180, 180, 180);
+        }
+        tbody tr:nth-of-type(2n - 1) {
+            background-color: rgb(235, 235, 235);
+        }
+        tbody tr {
+            border-bottom: 1px solid rgb(180, 180, 180);
+        }
+        th,
+        td {
+            width: 120px;
+            padding: 3px 3px;
+        }
+
+        #ageSortCell {
+            cursor: pointer;
+        }
+
+        img {
+            vertical-align: middle;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Отсортировать таблицу
+    важность: 5
+    Есть таблица:
+        
+    Имя	Фамилия	Отчество	Возраст
+    Вася	Петров	Александрович	10
+    Петя	Иванов	Петрович	15
+    Владимир	Ленин	Ильич	9
+    ...	...	...	...
+    Строк в таблице много: может быть 20, 50, 100… Есть и другие элементы в документе.
+        
+    Как бы вы предложили отсортировать содержимое таблицы по полю Возраст? Обдумайте алгоритм, реализуйте его. -->
+
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Surname</th>
+                <th>Club</th>
+                <th id="ageSortCell">Age
+                    <img src="https://www.brandeps.com/icon-download/S/Sort-02.svg" alt="sort" width="14px">
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Lionel</td>
+                <td>Messi</td>
+                <td>Barcelona</td>
+                <td>30</td>
+            </tr>
+            <tr>
+                <td>Cristiano</td>
+                <td>Ronaldo</td>
+                <td>Real Madrid</td>
+                <td>33</td>
+            </tr>
+            <tr>
+                <td>Neymar</td>
+                <td>Junior</td>
+                <td>PSG</td>
+                <td>26</td>
+            </tr>
+            <tr>
+                <td>Kevin</td>
+                <td>De Bruyne</td>
+                <td>Manchester City</td>
+                <td>26</td>
+            </tr>
+            <tr>
+                <td>Harry</td>
+                <td>Kane</td>
+                <td>Tottenham</td>
+                <td>23</td>
+            </tr>
+            <tr>
+                <td>Alex</td>
+                <td>Sandro</td>
+                <td>Juventus</td>
+                <td>27</td>
+            </tr>
+            <tr>
+                <td>Leonardo</td>
+                <td>Bonucci</td>
+                <td>Milan</td>
+                <td>30</td>
+            </tr>
+            <tr>
+                <td>Robert</td>
+                <td>Lewandowski</td>
+                <td>Bayern</td>
+                <td>29</td>
+            </tr>
+            <tr>
+                <td>Fernando</td>
+                <td>Torres</td>
+                <td>Atletico Madrid</td>
+                <td>33</td>
+            </tr>
+            <tr>
+                <td>Eden</td>
+                <td>Hazard</td>
+                <td>Chelsea</td>
+                <td>27</td>
+            </tr>
+            <tr>
+                <td>Daniele</td>
+                <td>De Rossi</td>
+                <td>Roma</td>
+                <td>34</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <script>
+        let table = document.querySelector('table');
+        let ageSortCell = document.getElementById('ageSortCell');
+
+        ageSortCell.addEventListener('click', sortForAgeDesc);
+        function sortForAgeDesc() {
+            let rowsArray = [];
+            for (let i = 1; i < table.rows.length; i++) {
+                rowsArray.push(table.rows[i]);
+            }
+            rowsArray.sort(compareAges);
+            for (let i = 0; i < rowsArray.length; i++) {
+                table.lastElementChild.children[i].insertAdjacentElement('beforeBegin', rowsArray[i]);
+            }
+            function compareAges(a, b) {
+                return +b.children[3].innerHTML - +a.children[3].innerHTML;
+            }
+            ageSortCell.lastElementChild.src = 'https://www.brandeps.com/icon-download/S/Sort-down-01.svg';
+            ageSortCell.removeEventListener('click', sortForAgeDesc);
+            ageSortCell.addEventListener('click', sortForAgeAsc);
+        }
+
+        function sortForAgeAsc() {
+            let rowsArray = [];
+            for (let i = 1; i < table.rows.length; i++) {
+                rowsArray.push(table.rows[i]);
+            }
+            rowsArray.sort(compareAges);
+            for (let i = 0; i < rowsArray.length; i++) {
+                table.lastElementChild.children[i].insertAdjacentElement('beforeBegin', rowsArray[i]);
+            }
+            function compareAges(a, b) {
+                return +a.children[3].innerHTML - +b.children[3].innerHTML;
+            }
+            ageSortCell.lastElementChild.src = 'https://www.brandeps.com/icon-download/S/Sort-up-01.svg';
+            ageSortCell.addEventListener('click', sortForAgeDesc);
+        }
+    </script>
+</body>
+
+</html>

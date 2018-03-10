@@ -1,0 +1,73 @@
+/* Первое задание */
+/* li {
+    list-style: none;
+}
+.icon {
+    float: left;
+}
+.text {
+    margin-left: 15px;
+}
+.opened .icon {
+    width: 15px;
+    height: 15px;
+    background-image: url(https://js.cx/sprite-tree/minus.gif);
+}
+.closed .icon {
+    width: 15px;
+    height: 15px;
+    background-image: url(https://js.cx/sprite-tree/plus.gif);
+}
+.article .icon {
+    width: 15px;
+    height: 15px;
+    background-image: url(https://js.cx/sprite-tree/article.gif);
+} */
+
+
+
+
+/* Второе задание */
+/* #container {
+    width: 60%;
+    height: 40px;
+    margin: auto;
+}
+#leftArrow {
+    float: left;
+    cursor: pointer;
+}
+#rightArrow {
+    float: right;
+    cursor: pointer;
+}
+#pages {
+    list-style: none;
+    text-align: center;
+    margin: 0;
+}
+li {
+    display: inline;
+    margin: 0 3px;
+    line-height: 40px;
+    cursor: pointer;
+} */
+
+
+
+
+/* Третье задание */
+/* .left {
+    float:left;
+    width:30%;
+    background: #aef;
+}
+
+.right {
+    box-sizing: border-box;
+    float:right;
+    width:70%;
+    background: tan;
+    border-left: 2px solid black;
+    padding-left: 10px;
+} */

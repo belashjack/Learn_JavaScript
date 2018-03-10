@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .blue {
+            color: blue;
+        }
+        .green {
+            color: green;
+        }
+        .red {
+            color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Часики с использованием "setInterval"
+    важность: 4
+    Создайте цветные часики как в примере ниже: -->
+    <div id="clocks"></div>
+    <script>
+        let clocks = document.getElementById('clocks');
+
+        let hours = document.createElement('span');
+        hours.classList.add('red');
+        hours.textContent = Math.floor(new Date(Date.now()).getHours()/10) === 0 ? '0' + new Date(Date.now()).getHours() : new Date(Date.now()).getHours();
+        clocks.appendChild(hours);
+
+        clocks.appendChild(document.createTextNode(':'));
+
+        let minutes = document.createElement('span');
+        minutes.classList.add('green');
+        minutes.textContent = Math.floor(new Date(Date.now()).getMinutes()/10) === 0 ? '0' + new Date(Date.now()).getMinutes() : new Date(Date.now()).getMinutes();
+        clocks.appendChild(minutes);
+
+        clocks.appendChild(document.createTextNode(':'));
+
+        let seconds = document.createElement('span');
+        seconds.classList.add('blue');
+        seconds.textContent = Math.floor(new Date(Date.now()).getSeconds()/10) === 0 ? '0' + new Date(Date.now()).getSeconds() : new Date(Date.now()).getSeconds();
+        clocks.appendChild(seconds);
+
+        setInterval(function() {
+            seconds.textContent = Math.floor(new Date(Date.now()).getSeconds()/10) === 0 ? '0' + new Date(Date.now()).getSeconds() : new Date(Date.now()).getSeconds();
+        }, 1000);
+        setInterval(function() {
+            minutes.textContent = Math.floor(new Date(Date.now()).getMinutes()/10) === 0 ? '0' + new Date(Date.now()).getMinutes() : new Date(Date.now()).getMinutes();
+        }, 1000);
+        setInterval(function() {
+            hours.textContent = Math.floor(new Date(Date.now()).getHours()/10) === 0 ? '0' + new Date(Date.now()).getHours() : new Date(Date.now()).getHours();
+        }, 1000);
+    </script>
+</body>
+
+</html>

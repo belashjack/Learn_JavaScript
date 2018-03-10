@@ -1,0 +1,58 @@
+/* Задача 1: "Поместите мяч в центр поля (CSS)" */
+/* #field {
+    width: 200px;
+    border: 10px groove black;
+    background-color: #00FF00;
+    position: relative;
+  }
+
+  #ball {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  } */
+
+
+
+
+  /* Задача 2: "Форма + модальное окно" */
+  /* #modal {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 1;
+  }
+  #innerModal {
+    position: absolute;
+    top: 20px;
+    bottom: 20px;
+    left: 20px;
+    right: 20px;
+    background-color: rgb(135, 141, 228);
+    opacity: 0.6;
+  }
+  form {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    width: 350px;
+    height: 150px;
+    border: 1px solid black;
+    margin: auto;
+    background-color: white;
+  }
+  #icon {
+    float: left;
+    width: 50px;
+  }
+  #content {
+    margin-left: 50px;
+  }
+  input {
+    margin: 5px;
+  } */
