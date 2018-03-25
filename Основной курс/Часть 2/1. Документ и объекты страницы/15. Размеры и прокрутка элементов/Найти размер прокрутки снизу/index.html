@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #container {
+            position: relative;
+            background-color: rgba(255, 0, 255, 0.233);
+        }
+
+        #div {
+            width: 100px;
+            height: 100px;
+            background-color: darkseagreen;
+            position: relative;
+            top: 30px;
+            left: 50px;
+            border: 5px solid salmon;
+            overflow: auto;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Найти размер прокрутки снизу
+    важность: 5
+    Свойство elem.scrollTop содержит размер прокрученной области при отсчете сверху. А как подсчитать размер прокрутки снизу?
+        
+    Напишите соответствующее выражение для произвольного элемента elem.
+        
+    Проверьте: если прокрутки нет вообще или элемент полностью прокручен – оно должно давать ноль. -->
+
+    <div id="container">
+        <div id="div">
+            <p>PPP</p>
+            <p>PPP</p>
+        </div>
+    </div>
+    
+    <script>
+        let div = document.querySelector('#div');
+        console.log(div.scrollHeight, 'scrollHeight');
+        // div.scrollTop += 120;
+        console.log(div.scrollTop, 'scrollTop');
+        console.log(div.scrollHeight - div.scrollTop - div.clientHeight , 'Снизу');
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .tree li {
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Дерево: проверка клика на заголовке
+    важность: 3
+    Есть кликабельное JavaScript-дерево UL/LI (см. задачу Раскрывающееся дерево).
+        
+    При клике на заголовке его список его детей скрывается-раскрывается. 
+
+    Однако, проблема в том, что скрытие-раскрытие происходит даже при клике вне заголовка, на пустом пространстве справа от него.
+
+    Как скрывать/раскрывать детей только при клике на заголовок?
+    В задаче Раскрывающееся дерево это решено так: заголовки завёрнуты в элементы SPAN и проверяются клики только на них. Представим на минуту, что мы не хотим оборачивать текст в SPAN, а хотим оставить как есть. Например, по соображениям производительности, если дерево и так очень большое, ведь оборачивание всех заголовков в SPAN увеличит количество DOM-узлов в 2 раза.
+
+    Решите задачу без обёртывания заголовков в SPAN, используя работу с координатами.
+    Исходный документ содержит кликабельное дерево.
+
+    P.S. Задача – скорее на сообразительность, однако подход может быть полезен в реальной жизни. -->
+    <ul class="tree" id="tree">
+        <li>Животные
+            <ul>
+                <li>Млекопитающие
+                    <ul>
+                        <li>Коровы</li>
+                        <li>Ослы</li>
+                        <li>Собаки</li>
+                        <li>Тигры</li>
+                    </ul>
+                </li>
+                <li>Другие
+                    <ul>
+                        <li>Змеи</li>
+                        <li>Птицы</li>
+                        <li>Ящерицы</li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+        <li>Рыбы
+            <ul>
+                <li>Аквариумные
+                    <ul>
+                        <li>Гуппи</li>
+                        <li>Скалярии</li>
+                    </ul>
+
+                </li>
+                <li>Морские
+                    <ul>
+                        <li>Морская форель</li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+    </ul>
+
+    <script>
+        var tree = document.getElementById('tree');
+
+        tree.onclick = function (event) {
+            var target = event.target;
+
+            let span = document.createElement('span');
+            target.insertAdjacentElement('afterBegin', span);
+            span.appendChild(span.nextSibling);
+
+            let elem = document.elementFromPoint(event.clientX, event.clientY);
+
+            if (elem.nodeName === 'SPAN') {
+                var node = target.getElementsByTagName('ul')[0];
+                if (!node) return;
+                node.style.display = node.style.display ? '' : 'none';
+            }
+            target.insertBefore(span.firstChild, span);
+            target.removeChild(span);
+
+        }
+    </script>
+
+</body>
+
+</html>

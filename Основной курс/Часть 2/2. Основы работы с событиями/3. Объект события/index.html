@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #field {
+            width: 200px;
+            height: 150px;
+            border: 10px groove black;
+            background-color: #00FF00;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        #ball {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            margin-left: -20px;
+            margin-top: -20px;
+            transition: all 1s;
+        }
+    </style>
+</head>
+
+<body style="height:2000px">
+    <!-- Передвигать мяч по полю
+    важность: 5
+    Сделайте так, что при клике по полю мяч перемещался на место клика.
+    Кликните на любое место поля, чтобы мяч перелетел туда.
+
+    Требования:
+
+    * Мяч после перелёта должен становиться центром ровно под курсор мыши, если это возможно без вылета за край поля.
+    * CSS-анимация не обязательна, но желательна.
+    * Мяч должен останавливаться у границ поля, ни в коем случае не вылетать за них.
+    * При прокрутке страницы с полем ничего не должно ломаться.
+
+    Замечания:
+    * Код не должен зависеть от конкретных размеров мяча и поля.
+    * Вам пригодятся свойства event.clientX/event.clientY -->
+
+    <br> Мяч никогда не вылетит за границы поля.
+    <div id="field">
+        <img src="https://js.cx/clipart/ball.svg" id="ball"> . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+    </div>
+    <script>
+        let field = document.getElementById('field');
+        let ball = document.getElementById('ball');
+        field.addEventListener('click', moveBall);
+
+        function moveBall(event) {
+            let leftTopInnerCorner = {
+                x: field.getBoundingClientRect().left + field.clientLeft,
+                y: field.getBoundingClientRect().top + field.clientTop
+            }
+
+            ball.style.top = event.clientY - leftTopInnerCorner.y + 'px';
+            ball.style.left = event.clientX - leftTopInnerCorner.x + 'px';
+
+            if (event.clientX > leftTopInnerCorner.x + field.clientWidth - ball.clientWidth / 2) {
+                ball.style.left = leftTopInnerCorner.x + field.clientWidth - ball.clientWidth + 'px';
+            }
+            if (event.clientX < leftTopInnerCorner.x + ball.clientWidth / 2) {
+                ball.style.left = leftTopInnerCorner.x + 'px';
+            }
+            if (event.clientY > leftTopInnerCorner.y + field.clientHeight - ball.clientHeight / 2) {
+                ball.style.top = field.clientHeight - ball.clientHeight / 2 + 'px';
+            }
+            if (event.clientY < leftTopInnerCorner.y + ball.clientHeight / 2) {
+                ball.style.top = ball.clientHeight/2 + 'px';
+            }
+        }
+    </script>
+</body>
+
+</html>

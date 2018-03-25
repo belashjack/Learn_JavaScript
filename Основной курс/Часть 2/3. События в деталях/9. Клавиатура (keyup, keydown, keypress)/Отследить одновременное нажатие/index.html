@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- Отследить одновременное нажатие
+    важность: 3
+    Создайте функцию runOnKeys(func, code1, code2, ... code_n), которая запускает func при одновременном нажатии клавиш со скан-кодами code1, code2, …, code_n.
+        
+    Например, код ниже выведет alert при одновременном нажатии клавиш "Q" и "W" (в любом регистре, в любой раскладке) -->
+    
+    <p>Нажмите одновременно "Q" и "W" (в любой раскладке).</p>
+    <script>
+        function runOnKeys(...args) {
+            let pressed = {};
+            document.onkeydown = function(event) {
+                pressed[event.keyCode] = true;
+                if (pressed[args[1]] && pressed[args[2]]) {
+                    args[0]();
+                    pressed = {};
+                }
+            }
+            document.onkeyup = function(event) {
+                delete pressed[event.keyCode];
+            }
+        }
+
+        runOnKeys(
+            function () { alert("Hello!") },
+            "Q".charCodeAt(0),
+            "W".charCodeAt(0)
+        );
+    </script>
+</body>
+
+</html>

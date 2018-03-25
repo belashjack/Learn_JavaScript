@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        ul .open {
+            display: none;
+        }
+        #mainUl span:hover {
+            font-weight: bold;
+        }
+        #mainUl span {
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Раскрывающееся дерево
+    важность: 5
+    Создайте дерево, которое по клику на заголовок скрывает-показывает детей:
+
+    Требования:
+    * Использовать делегирование.
+    * Клик вне текста заголовка (на пустом месте) ничего делать не должен.
+    * При наведении на заголовок – он становится жирным, реализовать через CSS.
+    P.S. При необходимости HTML/CSS дерева можно изменить. -->
+
+    <ul id="mainUl">
+        <li>Животные
+            <ul>
+                <li>Млекопитающие
+                    <ul>
+                        <li>Коровы</li>
+                        <li>Ослы</li>
+                        <li>Собаки</li>
+                        <li>Тигры</li>
+                    </ul>
+                </li>
+                <li>Другие
+                    <ul>
+                        <li>Змеи</li>
+                        <li>Птицы</li>
+                        <li>Ящерицы</li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+        <li>Рыбы
+            <ul>
+                <li>Аквариумные
+                    <ul>
+                        <li>Гуппи</li>
+                        <li>Скалярии</li>
+                    </ul>
+                </li>
+                <li>Морские
+                    <ul>
+                        <li>Морская форель</li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+    </ul>
+    <script>
+        let mainUl = document.getElementById('mainUl');
+        let lis = mainUl.querySelectorAll('li');
+        for (let i = 0; i < lis.length; i++) {
+            let span = document.createElement('span');
+            lis[i].insertAdjacentElement('afterBegin', span);
+            span.appendChild(span.nextSibling);
+        }
+
+        mainUl.onclick = function(event) {
+            let target = event.target;
+            if (target.tagName === 'SPAN' && target.nextElementSibling) {
+                target.nextElementSibling.classList.toggle('open');
+            }
+        }
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        td select,
+        td input {
+            width: 150px;
+        }
+
+        #diagram td {
+            vertical-align: bottom;
+            text-align: center;
+            padding: 10px;
+        }
+
+        #diagram div {
+            margin: auto;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Автовычисление процентов по вкладу
+    важность: 5
+    Создайте интерфейс для автоматического вычисления процентов по вкладу.
+        
+    Ставка фиксирована: 12% годовых. При включённом поле «капитализация» – проценты приплюсовываются к сумме вклада каждый месяц (сложный процент).
+    Технические требования:
+    * В поле с суммой должно быть нельзя ввести не-цифру. При этом пусть в нём работают специальные клавиши и сочетания Ctrl-X/Ctrl-V.
+    * Изменения в форме отражаются в результатах сразу. -->
+
+    Калькулятор процентов, из расчёта 12% годовых.
+    <form name="calculator">
+        <table>
+            <tr>
+                <td>Сумма</td>
+                <td>
+                    <input name="money" type="text" value="10000">
+                </td>
+            </tr>
+            <tr>
+                <td>Срок в месяцах</td>
+                <td>
+                    <select name="months">
+                        <option value="3">3 (минимум)</option>
+                        <option value="6">6 (полгода)</option>
+                        <option value="12" selected>12 (год)</option>
+                        <option value="18">18 (1.5 года)</option>
+                        <option value="24">24 (2 года)</option>
+                        <option value="30">30 (2.5 года)</option>
+                        <option value="36">36 (3 года)</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>С капитализацией</td>
+                <td>
+                    <input name="capitalization" type="checkbox">
+                </td>
+            </tr>
+        </table>
+    </form>
+
+    <table id="diagram">
+        <tr>
+            <th>Было:</th>
+            <th>Станет:</th>
+        </tr>
+        <tr>
+            <th id="money-before"></th>
+            <th id="money-after"></th>
+        </tr>
+        <tr>
+            <td>
+                <div style="background: red;width:40px;height:100px" id="height-before"></div>
+            </td>
+            <td>
+                <div style="background: green;width:40px;height:0" id="height-after"></div>
+            </td>
+        </tr>
+    </table>
+
+    <script>
+        // вспомогательная функция для получения символа из события keypress
+        // (вдруг понадобится))
+        function getChar(event) {
+            if (event.which == null) {
+                if (event.keyCode < 32) return null;
+                return String.fromCharCode(event.keyCode) // IE
+            }
+            if (event.which != 0 && event.charCode != 0) {
+                if (event.which < 32) return null;
+                return String.fromCharCode(event.which) // остальные
+            }
+            return null; // специальная клавиша
+        }
+        // ваш код...
+        let moneyBefore = document.getElementById('money-before');
+        let moneyAfter = document.getElementById('money-after');
+        let form = document.forms.calculator;
+        let heightBefore = document.getElementById('height-before');
+        let heightAfter = document.getElementById('height-after');
+        let money = form.elements.money;
+        let capitalization = form.elements.capitalization;
+        let monthsValue = +form.elements.months.options[form.elements.months.selectedIndex].value;
+        let checked = capitalization.checked;
+
+        moneyBefore.innerHTML = form.elements.money.value;
+        changeMoneyAfter();
+        changeHeightAfter();
+
+        money.oninput = function() {
+            moneyBefore.innerHTML = this.value;
+            changeMoneyAfter();
+        }
+
+        money.onkeypress = function(event) {
+            if (getChar(event) < '0' || getChar(event) > '9') {
+                return false;
+            }
+        }
+
+        form.elements.months.onchange = function () {
+            monthsValue = +form.elements.months.options[form.elements.months.selectedIndex].value;
+            changeMoneyAfter();
+            changeHeightAfter();
+        }
+
+        capitalization.onchange = function() {
+            checked = capitalization.checked;
+            changeMoneyAfter();
+            changeHeightAfter();
+        }
+        
+        function changeMoneyAfter() {
+            if (!checked) {
+                moneyAfter.innerHTML = Math.floor(+moneyBefore.innerHTML + moneyBefore.innerHTML * monthsValue / 12 * 0.12);
+            } else {
+                alert('Если с капитвализацией, то не доделал');
+            }
+        }
+        function changeHeightAfter() {
+            // if (!checked) {
+                heightAfter.style.height = heightBefore.offsetHeight * (+moneyAfter.innerHTML / +moneyBefore.innerHTML) + 'px';
+            // } else {
+
+            // }
+        }
+    </script>
+</body>
+
+</html>

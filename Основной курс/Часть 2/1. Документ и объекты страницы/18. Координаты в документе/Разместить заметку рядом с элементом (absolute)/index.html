@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .note {
+            position: absolute;
+            z-index: 1000;
+            padding: 5px;
+            border: 1px solid black;
+            background: white;
+            text-align: center;
+            font: italic 14px Georgia;
+        }
+
+        blockquote {
+            background: #f9f9f9;
+            border-left: 10px solid #ccc;
+            margin: 0 0 0 100px;
+            padding: .5em 10px;
+            quotes: "\201C""\201D""\2018""\2019";
+            display: inline-block;
+            white-space: pre;
+        }
+
+        blockquote:before {
+            color: #ccc;
+            content: open-quote;
+            font-size: 4em;
+            line-height: .1em;
+            margin-right: .25em;
+            vertical-align: -.4em;
+        }
+    </style>
+</head>
+
+<body style="height: 2000px">
+    <!-- Разместить заметку рядом с элементом (absolute)
+    важность: 5
+    Модифицируйте решение задачи Разместить заметку рядом с элементом, чтобы при прокрутке страницы заметка не убегала от элемента.     
+    Используйте для этого координаты относительно документа и position:absolute вместо position:fixed.        
+    В качестве исходного документа используйте решение задачи Разместить заметку рядом с элементом, для тестирования прокрутки добавьте стиль <body style="height: 2000px">. -->
+
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit sint atque dolorum fuga ad incidunt voluptatum
+        error fugiat animi amet! Odio temporibus nulla id unde quaerat dignissimos enim nisi rem provident molestias sit
+        tempore omnis recusandae esse sequi officia sapiente.</p>
+
+
+    <blockquote>
+        - Что на завтрак, Бэрримор? - Овсянка, сэр. - А на обед? - Овсянка, сэр. - Ну а на ужин? - Котлеты, сэр. - Уррра!!! - Из
+        овсянки, сэр!!!
+    </blockquote>
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit sint atque dolorum fuga ad incidunt voluptatum
+        error fugiat animi amet! Odio temporibus nulla id unde quaerat dignissimos enim nisi rem provident molestias sit
+        tempore omnis recusandae esse sequi officia sapiente.</p>
+
+    <script>
+        function positionAt(anchor, position, elem) {
+            switch (position) {
+                case 'top':
+                    elem.style.top = anchor.getBoundingClientRect().top + 4 + 'px';
+                    elem.style.left = anchor.getBoundingClientRect().left + 'px';
+                    break;
+                case 'right':
+                    elem.style.top = anchor.getBoundingClientRect().top + 'px';
+                    elem.style.left = anchor.getBoundingClientRect().right + 'px';
+                    break;
+                case 'bottom':
+                    elem.style.top = anchor.getBoundingClientRect().bottom + 'px';
+                    elem.style.left = anchor.getBoundingClientRect().left + 'px';
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        function showNote(anchor, position, html) {
+            let note = document.createElement('div');
+            positionAt(anchor, position, note);
+            note.classList.add('note');
+            note.innerHTML = html;
+            anchor.insertAdjacentElement('afterEnd', note);
+        }
+
+        var blockquote = document.querySelector('blockquote');
+
+        showNote(blockquote, "top", "заметка сверху");
+        showNote(blockquote, "right", "заметка справа");
+        showNote(blockquote, "bottom", "заметка снизу");
+    </script>
+</body>
+
+</html>

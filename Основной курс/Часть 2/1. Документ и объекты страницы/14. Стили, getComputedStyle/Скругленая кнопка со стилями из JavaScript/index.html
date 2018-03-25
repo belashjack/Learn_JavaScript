@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        p {
+            background-color: rgb(168, 134, 134);
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Скругленая кнопка со стилями из JavaScript
+    важность: 3
+    Создайте кнопку в виде элемента <a> с заданным стилем, используя JavaScript.
+    В примере ниже такая кнопка создана при помощи HTML/CSS. В вашем решении кнопка должна создаваться, настраиваться и добавляться в документ при помощи только JavaScript, без тегов <style> и <a>.
+    <style>
+        .button {
+            -moz-border-radius: 8px;
+            -webkit-border-radius: 8px;
+            border-radius: 8px;
+            border: 2px groove green;
+            display: block;
+            height: 30px;
+            line-height: 30px;
+            width: 100px;
+            text-decoration: none;
+            text-align: center;
+            color: red;
+            font-weight: bold;
+        }
+    </style>
+    <a class="button" href="/">Нажми меня</a>
+
+    Проверьте себя: вспомните, что означает каждое свойство. В чём состоит эффект его появления здесь? -->
+    
+    <script>
+        let button = document.createElement('a');
+        button.classList.add('button');
+        button.setAttribute('href', '/');
+        button.textContent = 'Нажми меня';
+        button.style.cssText = "-moz-border-radius: 8px;\
+            -webkit-border-radius: 8px;\
+            border-radius: 8px;\
+            color: red;";
+        button.style.border = "2px groove green";
+        button.style.display = 'block';
+        button.style.height = 30 + 'px';
+        let sss = getComputedStyle(button);
+        button.style.lineHeight = button.style.height;
+        button.style.width = '100px';
+        button.style.textDecoration = 'none';
+        button.style.textAlign = 'center';
+        button.style.fontWeight = 'bold';
+        document.body.appendChild(button);
+    </script>
+</body>
+
+</html>

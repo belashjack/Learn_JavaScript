@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        body {
+            height: 1000px;
+            /* подсказка должна работать независимо от прокрутки */
+        }
+
+        .tooltip {
+            border: 1px solid black;
+            display: inline-block;
+            padding: 12px;
+            font-family: sans-serif;
+            background-color: white;
+            font-style: italic;
+            font-size: 0.9em;
+            border-radius: 5px;
+            box-shadow: 3px 3px 5px rgb(140, 140, 140);
+            position: fixed;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Поведение "подсказка"
+    важность: 5
+    При наведении мыши на элемент, на нём возникает событие mouseover, при удалении мыши с элемента – событие mouseout.
+        
+    Зная это, напишите JS-код, который будет делать так, что при наведении на элемент, если у него есть атрибут data-tooltip – над ним будет показываться подсказка с содержимым этого атрибута.
+    В этой задаче можно полагать, что в элементе с атрибутом data-tooltip – только текст, то есть нет подэлементов.
+
+    Детали оформления:
+    * Подсказка должна появляться при наведении на элемент, по центру и на небольшом расстоянии сверху. При уходе курсора с элемента – исчезать.
+    * Текст подсказки брать из значения атрибута data-tooltip. Это может быть произвольный HTML.
+    * Оформление подсказки должно задаваться CSS.
+    * Подсказка не должна вылезать за границы экрана, в том числе если страница частично прокручена. Если нельзя показать сверху – показывать снизу элемента.
+
+    Важно: нужно использовать приём разработки «поведение», то есть поставить обработчик (точнее два) на document, а не на каждый элемент.
+    Плюс этого подхода – динамически добавленные в DOM позже элементы автоматически получат этот функционал. -->
+    
+    <p>ЛяЛяЛя ЛяЛяЛя ЛяЛяЛя ЛяЛяЛя ЛяЛяЛя ЛяЛяЛя ЛяЛяЛя ЛяЛяЛя ЛяЛяЛя</p>
+    <p>ЛяЛяЛя ЛяЛяЛя ЛяЛяЛя ЛяЛяЛя ЛяЛяЛя ЛяЛяЛя ЛяЛяЛя ЛяЛяЛя ЛяЛяЛя</p>
+    <button data-tooltip="подсказка длиннее, чем элемент">Короткая кнопка</button>
+    <button data-tooltip="HTML<br>подсказка">Ещё кнопка</button>
+    <p>Прокрутите страницу, чтобы ссылки были вверху и проверьте, правильно ли показываются подсказки.</p>
+
+    <script>
+        document.addEventListener('mouseover', showTooltip);
+        document.addEventListener('mouseout', hideTooltip);
+
+        function showTooltip(event) {
+            let target = event.target;
+            if (!target.getAttribute('data-tooltip')) return;
+
+            let tooltip = document.createElement('div');
+            tooltip.classList.add('tooltip');
+            tooltip.innerHTML = target.getAttribute('data-tooltip');
+
+            target.parentElement.insertBefore(tooltip, target);
+
+            if (tooltip.offsetHeight + 5 < target.getBoundingClientRect().top) {
+                tooltip.style.top = target.getBoundingClientRect().top - tooltip.offsetHeight - 5 + 'px';
+
+                let diff = -(target.offsetWidth - tooltip.offsetWidth);
+                if (tooltip.getBoundingClientRect().left < diff / 2) {
+                    tooltip.style.left = target.clientLeft + 0 + 'px';
+                } else {
+                    tooltip.style.left = Math.round(target.getBoundingClientRect().left + tooltip.clientLeft - diff / 2) + 'px';
+                }
+            } else {
+                tooltip.style.top = target.getBoundingClientRect().bottom + 5 + 'px';
+
+                let diff = -(target.offsetWidth - tooltip.offsetWidth);
+                if (tooltip.getBoundingClientRect().left < diff / 2) {
+                    tooltip.style.left = target.clientLeft + 0 + 'px';
+                } else {
+                    tooltip.style.left = Math.round(target.getBoundingClientRect().left + tooltip.clientLeft - diff / 2) + 'px';
+                }
+            }
+        }
+        function hideTooltip(event) {
+            let target = event.target;
+            if (!target.getAttribute('data-tooltip')) return;
+            target.parentElement.removeChild(target.previousElementSibling);
+        }
+    </script>
+
+</body>
+
+</html>

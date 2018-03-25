@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #mouse {
+            display: inline-block;
+            cursor: pointer;
+            margin: 0px;
+        }
+        #mouse:focus {
+            outline: 1px dashed black;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Мышонок на "клавиатурном" приводе
+    важность: 4
+    Кликните по мышонку. Затем нажимайте клавиши со стрелками, и он будет двигаться.
+    В этой задаче запрещается ставить обработчики куда-либо, кроме элемента #mouse.
+    Можно изменять атрибуты и классы в HTML. -->
+
+    <p>Кликните на мышонка и передвигайте его, нажимая клавиши со стрелками.</p>
+    <pre id="mouse">
+ _   _
+(q\_/p)
+ /. .\
+=\_t_/=   __
+ /   \   (
+((   ))   )
+/\) (/\  /
+\  Y  /-'
+ nn^nn
+    </pre>
+
+    <script>
+        let mouse = document.getElementById('mouse');
+        mouse.tabIndex = 1;
+        mouse.onmousedown = function () {
+            mouse.onkeydown = function (event) {
+                switch (event.keyCode) {
+                    case 37:
+                        this.style.position = 'fixed';
+                        this.style.left = this.getBoundingClientRect().left - this.offsetWidth + 'px';
+                        break;
+                    case 38:
+                        this.style.position = 'fixed';
+                        this.style.top = this.getBoundingClientRect().top - this.offsetHeight + 'px';
+                        break;
+                    case 39:
+                        this.style.position = 'fixed';
+                        this.style.left = this.getBoundingClientRect().left + this.offsetWidth + 'px';
+                        break;
+                    case 40:
+                        this.style.position = 'fixed';
+                        this.style.top = this.getBoundingClientRect().top + this.offsetHeight + 'px';
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+    </script>
+</body>
+
+</html>

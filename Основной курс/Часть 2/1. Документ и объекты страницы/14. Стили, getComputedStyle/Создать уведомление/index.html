@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .notification {
+            position: fixed;
+            z-index: 1000;
+            padding: 5px;
+            border: 1px solid black;
+            font: normal 20px Georgia;
+            background: white;
+            text-align: center;
+        }
+
+        .welcome {
+            background: red;
+            color: yellow;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Создать уведомление
+    важность: 5
+    Напишите функцию showNotification(options), которая показывает уведомление, пропадающее через 1.5 сек. -->
+
+    <script>
+        function showNotification(options) {
+            let notification = document.createElement('div');
+            let s = notification.style;
+            s.position = 'absolute';
+            s.top = options.top + 'px';
+            s.right = options.right + 'px';
+            notification.textContent = options.html;
+            notification.classList.add('notification', options.className);
+            document.body.appendChild(notification);
+
+            setTimeout(function() {
+                document.body.removeChild(notification);
+            }, 1500)
+        }
+
+        showNotification({
+            top: 10,
+            right: 10,
+            html: "Привет",
+            className: "welcome"
+        });
+    </script>
+</body>
+
+</html>

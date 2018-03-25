@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- Добавьте опцию к селекту
+    важность: 5
+    Есть селект:
+    <select>
+      <option value="Rock">Рок</option>
+      <option value="Blues" selected>Блюз</option>
+    </select>
+    При помощи JavaScript:
+        
+    1. Выведите значение и текст текущей выбранной опции.
+    2. Добавьте опцию: <option value="Classic">Классика</option>.
+    3. Сделайте её выбранной. -->
+
+    <form name="form">
+        <select>
+            <option value="Rock">Рок</option>
+            <option value="Blues" selected>Блюз</option>
+        </select>
+    </form>
+    <script>
+        let form = document.forms[0];
+        let select = form.elements[0];
+        console.log(select.value, select.options[select.selectedIndex].text);
+        let option = new Option('Классика', 'Classic');
+        select.appendChild(option);
+        option.selected = true;
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .title {
+            cursor: pointer;
+        }
+
+        .menu ul {
+            list-style: none;
+            margin-left: -15px;
+            display: none;
+        }
+
+        .menu ul li:first-child {
+            margin-top: -15px;
+        }
+        .opened ul {
+            display: list-item;
+        }
+
+        .title::before {
+            content: '▶';
+            color: green;
+            margin-right: 5px;
+        }
+        .opened .title::before {
+            content: '▼';
+            color: green;
+            margin-right: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="menu">
+        <span class="title">Сладости (нажми меня)!</span>
+        <ul>
+            <li>Торт</li>
+            <li>Пончик</li>
+            <li>Пирожное</li>
+        </ul>
+    </div>
+    <script>
+        let menu = document.querySelector('.menu');
+        let title = document.querySelector('.title');
+        title.addEventListener('click', openMenu);
+
+        function openMenu() {
+            menu.classList.toggle('opened');
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #contents {
+            padding: 5px;
+            border: 1px green solid;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Поймайте переход по ссылке
+    важность: 5
+    Сделайте так, чтобы при клике на ссылки внутри элемента #contents пользователю выводился вопрос о том, действительно ли он хочет покинуть страницу и если он не хочет, то прерывать переход по ссылке.
+    Детали:
+    * Содержимое #contents может быть загружено динамически и присвоено при помощи innerHTML. Так что найти все ссылки и поставить на них обработчики нельзя. Используйте делегирование.
+    * Содержимое может содержать вложенные теги, в том числе внутри ссылок, например, <a href=".."><i>...</i></a>. -->
+    
+    <fieldset id="contents">
+        <legend>#contents</legend>
+        <p>
+            Как насчет почитать
+            <a href="http://wikipedia.org">Википедию</a>, или посетить
+            <a href="http://w3.org">
+                <i>W3.org</i>
+            </a> и узнать про современные стандарты?
+        </p>
+    </fieldset>
+
+    <script>
+        let fieldset = document.getElementById('contents');
+        fieldset.addEventListener('click', askQuestion);
+
+        function askQuestion(event) {
+            let target = event.target;
+            while (target !== this) {
+                if (target.nodeName === 'A') {
+                    showConfirm();
+                }
+                target = target.parentNode;
+            }
+
+            function showConfirm() {
+                let answer = confirm(`Уйти на ${target.getAttribute('href')}?`);
+                if (!answer) {
+                    event.preventDefault();
+                };
+            }
+        }
+    </script>
+</body>
+
+</html>

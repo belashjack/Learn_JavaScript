@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #div {
+            width: 200px;
+            background-color:rgba(255, 0, 0, 0.486);
+            overflow: scroll;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Расширить элемент
+    важность: 4
+    В <body> есть элемент <div> с заданной шириной width.    
+    Задача – написать код, который «распахнет» <div> по ширине на всю страницу.    
+    Исходный документ (<div> содержит текст и прокрутку):        
+    P.S. Пользоваться следует исключительно средствами JS, CSS в этой задаче менять нельзя. Также ваш код должен быть универсален и не ломаться, если цифры в CSS станут другими.    
+    P.P.S. При расширении элемент <div> не должен вылезти за границу <body>. -->
+        
+    <div id="div">
+        <p>Some text some text some text some text some text
+           some text some text some text some text some text
+           some text some text some text some text some text
+           some text some text some text some text some text
+           some text some text some text some text some text
+           some text some text some text some text some text
+        </p>
+    </div>
+    <script>
+        let div = document.getElementById('div');
+        
+        div.style.width = document.body.offsetWidth + 'px';
+    </script>
+</body>
+
+</html>

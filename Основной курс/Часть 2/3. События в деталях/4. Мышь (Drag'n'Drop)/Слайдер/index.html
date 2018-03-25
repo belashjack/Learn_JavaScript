@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .slider {
+            border-radius: 5px;
+            background: #E0E0E0;
+            background: -moz-linear-gradient(left top, #E0E0E0, #EEEEEE) repeat scroll 0 0 transparent;
+            background: -webkit-gradient(linear, left top, right bottom, from(#E0E0E0), to(#EEEEEE));
+            background: linear-gradient(left top, #E0E0E0, #EEEEEE);
+            width: 310px;
+            height: 15px;
+            margin: 5px;
+        }
+
+        .thumb {
+            width: 10px;
+            height: 25px;
+            border-radius: 3px;
+            position: relative;
+            left: 10px;
+            top: -5px;
+            background: blue;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Слайдер
+    важность: 5
+    Создайте слайдер:
+    Захватите мышкой синий бегунок и двигайте его, чтобы увидеть в работе. 
+    Важно:
+    * Слайдер должен нормально работать при резком движении мыши влево или вправо, за пределы полосы. При этом бегунок должен останавливаться четко в нужном конце полосы.
+    * При нажатом бегунке мышь может выходить за пределы полосы слайдера, но слайдер пусть все равно работает (это удобно для пользователя). -->
+    <div id="slider" class="slider">
+        <div class="thumb"></div>
+    </div>
+
+    <script>
+        let thumb = document.getElementsByClassName('thumb')[0];
+        let slider = document.getElementById('slider');
+        thumb.onmousedown = function () {
+            let top = thumb.getBoundingClientRect().top;
+            let left = thumb.getBoundingClientRect().left;
+            let shiftX = event.pageX - getCoord(thumb).left;
+
+            thumb.style.position = 'absolute';
+            thumb.style.top = top + 'px';
+            thumb.style.left = left + 'px';
+
+            document.onmousemove = function (event) {
+                if (event.pageX > slider.getBoundingClientRect().left + shiftX && event.pageX < slider.getBoundingClientRect().right) {
+                    thumb.style.left = event.pageX - shiftX + 'px';
+                }
+            }
+            document.onmouseup = function () {
+                document.onmousemove = null;
+                document.onmouseup = null;
+            }
+
+            function getCoord(elem) { // кроме IE8-
+                var box = elem.getBoundingClientRect();
+                return {
+                    left: box.left + pageXOffset
+                };
+            }
+        }
+
+
+    </script>
+
+</body>
+
+</html>

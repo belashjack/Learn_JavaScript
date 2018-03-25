@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #container {
+        }
+        #mainPicture {
+        }
+        #mainPicture img {
+            width: 640px;
+            height: 480px;
+        }
+        #thumbs {
+            max-width: 640px;
+            border: 1px solid darkcyan;
+        }
+        #thumbs a {
+            border: 1px solid black;
+            /* float: left; */
+            display: inline-block;
+        }
+        #thumbs a:hover {
+            border-color: red;
+        }
+        #thumbs img {
+            width: 100px;
+            height: 75px;
+            margin: 2px;
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Галерея изображений
+    важность: 5
+    Создайте галерею изображений, в которой основное изображение изменяется при клике на уменьшенный вариант.
+
+    Для обработки событий используйте делегирование, т.е. не более одного обработчика.
+    P.S. Обратите внимание – клик может быть как на маленьком изображении IMG, так и на A вне него. При этом event.target будет, соответственно, либо IMG, либо A. -->
+    <div id="container">
+        <div id="mainPicture">
+            <img src="./images/road-through-woods-kerala-pictures.jpg" alt="">
+        </div>
+        <div id="thumbs">
+            <a href="./images/Brindisi_Italy.jpg"><img src="./images/Brindisi_Italy.jpg" alt=""></a>
+            <a href="./images/Dubai-Photos-Images-Photos-of-Dubai-800x600.jpg"><img src="./images/Dubai-Photos-Images-Photos-of-Dubai-800x600.jpg" alt=""></a>
+            <a href="./images/road-through-woods-kerala-pictures.jpg"><img src="./images/road-through-woods-kerala-pictures.jpg" alt=""></a>
+            <a href="./images/road-through-woods-kerala-pictures.jpg"><img src="./images/road-through-woods-kerala-pictures.jpg" alt=""></a>
+            <a href="./images/sad-girl-after-breakup.jpg"><img src="./images/sad-girl-after-breakup.jpg" alt=""></a>
+            <a href="./images/capitolc_800.jpg"><img src="./images/capitolc_800.jpg" alt=""></a>
+            <a href="./images/Creative-commons-correct-attribution.jpg"><img src="./images/Creative-commons-correct-attribution.jpg" alt=""></a>
+            <a href="./images/Peach_Leaf_Curl567.jpg"><img src="./images/Peach_Leaf_Curl567.jpg" alt=""></a>
+        </div>
+    </div>
+
+    <script>
+        let thumbs = document.getElementById('thumbs');
+        thumbs.addEventListener('click', changeMainPicture);
+
+        function changeMainPicture(event) {
+            let target = event.target;
+            while (target != this) {
+                if (target.nodeName === 'A') {
+                    changePic();
+                }
+                target = target.parentNode;
+            }
+            function changePic() {
+                let mainPicture = document.querySelector('#mainPicture img');
+                mainPicture.src = target.href;
+                event.preventDefault();
+            }
+        }
+    </script>
+</body>
+
+</html>
